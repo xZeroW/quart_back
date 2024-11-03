@@ -55,9 +55,12 @@ class SMTPSettings(BaseSettings):
 class RedisCacheSettings(BaseSettings):
     REDIS_CACHE_HOST: str = Field(env="REDIS_CACHE_HOST", default="localhost")
     REDIS_CACHE_PORT: int = Field(env="REDIS_CACHE_PORT", default=6379)
-    REDIS_CACHE_URL: str = f"redis://{REDIS_CACHE_HOST}:{REDIS_CACHE_PORT}"
 
     model_config = SettingsConfigDict(env_file=".env")
+
+    @property
+    def REDIS_CACHE_URL(self) -> str:
+        return f"redis://{self.REDIS_CACHE_HOST}:{self.REDIS_CACHE_PORT}"
 
 
 class RedisQueueSettings(BaseSettings):
@@ -76,9 +79,12 @@ class ClientSideCacheSettings(BaseSettings):
 class RedisRateLimiterSettings(BaseSettings):
     REDIS_RATE_LIMIT_HOST: str = Field(env="REDIS_RATE_LIMIT_HOST", default="localhost")
     REDIS_RATE_LIMIT_PORT: int = Field(env="REDIS_RATE_LIMIT_PORT", default=6379)
-    REDIS_RATE_LIMIT_URL: str = f"redis://{REDIS_RATE_LIMIT_HOST}:{REDIS_RATE_LIMIT_PORT}"
 
     model_config = SettingsConfigDict(env_file=".env")
+
+    @property
+    def REDIS_RATE_LIMIT_URL(self) -> str:
+        return f"redis://{self.REDIS_RATE_LIMIT_HOST}:{self.REDIS_RATE_LIMIT_PORT}"
 
 
 class DefaultRateLimitSettings(BaseSettings):
@@ -100,10 +106,20 @@ class DatabaseSettings(BaseSettings):
     DATABASE_NAME: str = Field(env="DATABASE_DB", default="DATABASE_NAME")
     DATABASE_SYNC_PREFIX: str = Field(env="DATABASE_SYNC_PREFIX", default="postgresql://")
     DATABASE_ASYNC_PREFIX: str = Field(env="DATABASE_ASYNC_PREFIX", default="postgresql+asyncpg://")
-    DATABASE_URI: str = f"{DATABASE_USER}:{DATABASE_PASS}@{DATABASE_HOST}:{DATABASE_PORT}/{DATABASE_NAME}"
-    DATABASE_URL: str | None = Field(env="DATABASE_URL", default=None)
 
     model_config = SettingsConfigDict(env_file=".env")
+
+    @property
+    def DATABASE_URI(self) -> str:
+        return (
+        f"{self.DATABASE_USER}:{self.DATABASE_PASS}@"
+        f"{self.DATABASE_HOST}:{self.DATABASE_PORT}/"
+        f"{self.DATABASE_NAME}"
+    )
+
+    @property
+    def DATABASE_URL(self) -> str:
+        return f"{self.DATABASE_ASYNC_PREFIX}{self.DATABASE_URI}"
 
 
 class EnvironmentOption(Enum):
