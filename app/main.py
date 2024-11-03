@@ -1,5 +1,6 @@
-from .core.setup import create_app
 import asyncio
+
+from .core.setup import create_app
 
 app = create_app()
 
