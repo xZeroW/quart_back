@@ -12,6 +12,7 @@ quart = "^0.19.8"
 quart-schema = {extras = ["pydantic"], version = "^0.20.0"}
 pydantic-settings = "^2.6.1"
 sqlalchemy = "^2.0.36"
+asyncpg = "^0.30.0"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.7.1"

@@ -1,11 +1,38 @@
-from quart import Quart
+from quart import Blueprint, Quart
 from quart_schema import QuartSchema
 
-from app.api.routes import router
+from .config import (
+    AppSettings,
+    AWSSettings,
+    ClientSideCacheSettings,
+    CryptSettings,
+    DatabaseSettings,
+    DiskSettings,
+    EnvironmentOption,
+    EnvironmentSettings,
+    SMTPSettings,
+    TestSettings,
+)
 
-app = Quart(__name__)
-QuartSchema(app, info={"title": "Quart API", "version": "0.1.0"})
-app.register_blueprint(router)
 
-def create_app():
+def create_app(router: Blueprint, settings: (
+        DatabaseSettings
+        | CryptSettings
+        | AppSettings
+        | DiskSettings
+        | ClientSideCacheSettings
+        | AWSSettings
+        | SMTPSettings
+        | TestSettings
+        | EnvironmentSettings
+    )):
+
+    app = Quart(__name__)
+
+    if isinstance(settings, EnvironmentSettings):
+        if settings.ENVIRONMENT != EnvironmentOption.PRODUCTION:
+            QuartSchema(app, info={"title": "Quart API", "version": "0.1.0"})
+
+    app.register_blueprint(router)
+
     return app
