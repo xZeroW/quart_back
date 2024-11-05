@@ -39,4 +39,3 @@ class User(Base):
     phone: Mapped[str | None] = mapped_column(default=None)
     enable_two_factor_auth: Mapped[bool] = mapped_column(default=False)
     first_user_key: Mapped[str | None] = mapped_column(default=None)
-
