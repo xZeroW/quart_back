@@ -91,10 +91,10 @@ class DatabaseSettings(BaseSettings):
     @property
     def DATABASE_URI(self) -> str:
         return (
-        f"{self.DATABASE_USER}:{self.DATABASE_PASS}@"
-        f"{self.DATABASE_HOST}:{self.DATABASE_PORT}/"
-        f"{self.DATABASE_NAME}"
-    )
+            f"{self.DATABASE_USER}:{self.DATABASE_PASS}@"
+            f"{self.DATABASE_HOST}:{self.DATABASE_PORT}/"
+            f"{self.DATABASE_NAME}"
+        )
 
     @property
     def DATABASE_URL(self) -> str:

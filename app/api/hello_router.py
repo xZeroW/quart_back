@@ -3,11 +3,11 @@ from quart_schema import tag, validate_response
 
 from app.schemas import HelloWorldResponseSchema
 
-hello_blueprint = Blueprint('hello', __name__, url_prefix='/')
+hello_blueprint = Blueprint("hello", __name__, url_prefix="/")
 
 
-@hello_blueprint.get('')
+@hello_blueprint.get("")
 @validate_response(HelloWorldResponseSchema)
-@tag(['/'])
+@tag(["/"])
 async def hello_world() -> HelloWorldResponseSchema:
-    return {'msg': 'Hello World'}, 200
+    return {"msg": "Hello World"}, 200
