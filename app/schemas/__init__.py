@@ -1,2 +1,2 @@
-from .hello_world_schema import HelloWorldResponseSchema
-from .user_schema import UserResponseSchema
+from app.schemas.hello_world_schema import HelloWorldResponseSchema
+from app.schemas.user_schema import UserResponseSchema

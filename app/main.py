@@ -1,8 +1,8 @@
 import asyncio
 
-from .api import router
-from .core.config import settings
-from .core.setup import create_app
+from app.api import router
+from app.core.config import settings
+from app.core.setup import create_app
 
 app = create_app(router=router, settings=settings)
 

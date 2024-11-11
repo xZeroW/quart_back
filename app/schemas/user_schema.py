@@ -2,7 +2,7 @@ from uuid import UUID
 
 from pydantic import EmailStr
 
-from .base_schema import BaseSchema
+from app.schemas.base_schema import BaseSchema
 
 
 class UserResponseSchema(BaseSchema):

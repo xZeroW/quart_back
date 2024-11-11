@@ -1,7 +1,7 @@
 from quart import Blueprint, Quart
 from quart_schema import QuartSchema
 
-from .config import (
+from app.core.config import (
     AppSettings,
     AWSSettings,
     ClientSideCacheSettings,
@@ -13,7 +13,7 @@ from .config import (
     SMTPSettings,
     TestSettings,
 )
-from .error_handlers import register_error_handlers
+from app.core.error_handlers import register_error_handlers
 
 
 def create_app(
