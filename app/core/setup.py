@@ -14,6 +14,7 @@ from app.core.config import (
     TestSettings,
 )
 from app.core.error_handlers import register_error_handlers
+from app.core.middleware import db_session_middleware
 
 
 def create_app(
@@ -41,6 +42,8 @@ def create_app(
         Quart: Configured Quart application instance.
     """
     app = Quart(__name__)
+
+    db_session_middleware(app)
 
     if isinstance(settings, EnvironmentSettings) and settings.ENVIRONMENT != EnvironmentOption.PRODUCTION:
         QuartSchema(app, info={"title": "Quart API", "version": "0.1.0"})
