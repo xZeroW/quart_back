@@ -7,12 +7,12 @@ def register_error_handlers(app: Quart, production: bool = False):
         if production:
             return {"error": "VALIDATION"}, status_code
         else:
-            return {"errors": str(e.validation_error)}, status_code
+            return str(e.validation_error), status_code
 
     @app.errorhandler(ResponseSchemaValidationError)
     async def handle_response_validation_error(e):
-        format_validation_error(e, 500)
+        return format_validation_error(e, 500)
 
     @app.errorhandler(RequestSchemaValidationError)
     async def handle_request_validation_error(error):
-        format_validation_error(error, 400)
+        return format_validation_error(error, 400)
