@@ -1,5 +1,7 @@
-from pydantic import BaseModel, Field
+from pydantic import Field
+
+from app.schemas.base_schema import BaseSchema
 
 
-class HelloWorldResponseSchema(BaseModel):
+class HelloWorldResponseSchema(BaseSchema):
     msg: str = Field(default="Hello World")
