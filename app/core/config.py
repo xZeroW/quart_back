@@ -1,6 +1,6 @@
 from enum import Enum
 
-from pydantic import Field
+from pydantic import EmailStr, Field
 from pydantic_settings import BaseSettings
 
 
@@ -10,7 +10,7 @@ class AppSettings(BaseSettings):
     APP_VERSION: str | None = Field(default=None)
     LICENSE_NAME: str | None = Field(default=None)
     CONTACT_NAME: str | None = Field(default=None)
-    CONTACT_EMAIL: str | None = Field(default=None)
+    CONTACT_EMAIL: EmailStr | None = Field(default=None)
     PASSWORD_URL: str | None = Field(default=None)
 
     QUART_APP: str | None = Field(default="app.main")
@@ -38,7 +38,7 @@ class AWSSettings(BaseSettings):
 class SMTPSettings(BaseSettings):
     SMTP_BASE_URL: str | None = Field(default=None)
     SMTP_BASE_URL_ADM: str | None = Field(default=None)
-    SMTP_EMAIL_SENDER: str | None = Field(default=None)
+    SMTP_EMAIL_SENDER: EmailStr | None = Field(default=None)
     SMTP_USERNAME: str | None = Field(default=None)
     SMTP_EMAIL_PASSWORD: str | None = Field(default=None)
 
