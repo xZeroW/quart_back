@@ -44,11 +44,12 @@ def create_app(
     app = Quart(__name__)
 
     db_session_middleware(app)
-    QuartSchema(app, info={"title": "Quart API", "version": "0.1.0"})  # TODO: descobrir como desativar docs em produção
 
     app.register_blueprint(router)
 
     is_production = settings.ENVIRONMENT == EnvironmentOption.PRODUCTION
+    doc_path = None if is_production else "/openapi.json"
+    QuartSchema(app, openapi_path=doc_path, info={"title": "Quart API", "version": "0.1.0"})
     register_error_handlers(app, is_production)
 
     return app
