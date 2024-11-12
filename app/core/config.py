@@ -14,6 +14,7 @@ class AppSettings(BaseSettings):
     PASSWORD_URL: str | None = Field(default=None)
 
     QUART_APP: str | None = Field(default="app.main")
+    QUART_SCHEMA_CONVERT_CASING: bool = Field(default=False)
 
 
 class CryptSettings(BaseSettings):

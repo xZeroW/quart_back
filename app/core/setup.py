@@ -44,9 +44,7 @@ def create_app(
     app = Quart(__name__)
 
     db_session_middleware(app)
-
-    if isinstance(settings, EnvironmentSettings) and settings.ENVIRONMENT != EnvironmentOption.PRODUCTION:
-        QuartSchema(app, info={"title": "Quart API", "version": "0.1.0"})
+    QuartSchema(app, info={"title": "Quart API", "version": "0.1.0"})  # TODO: descobrir como desativar docs em produção
 
     app.register_blueprint(router)
 
