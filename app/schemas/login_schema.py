@@ -1,5 +1,3 @@
-from typing import Optional
-
 from app.schemas.base_schema import BaseSchema
 
 
@@ -8,4 +6,4 @@ class LoginRequestSchema(BaseSchema):
     email: str
     password: str
     current_sign_in_ip: str
-    user_first_key: Optional[str]
+    user_first_key: str | None
