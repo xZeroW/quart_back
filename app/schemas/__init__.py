@@ -1,3 +1,4 @@
-from app.schemas.customer_schema import CustomerResponseSchema
-from app.schemas.hello_world_schema import HelloWorldResponseSchema
-from app.schemas.user_schema import UserResponseSchema
+from app.schemas.customer_schema import CustomerResponseSchema as CustomerResponseSchema
+from app.schemas.hello_world_schema import HelloWorldResponseSchema as HelloWorldResponseSchema
+from app.schemas.login_schema import LoginRequestSchema as LoginRequestSchema
+from app.schemas.user_schema import UserResponseSchema as UserResponseSchema
