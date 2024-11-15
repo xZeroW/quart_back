@@ -1,4 +1,5 @@
 from quart import Blueprint, Quart
+from quart_cors import cors
 from quart_schema import QuartSchema
 
 from app.core.config import (
@@ -42,6 +43,7 @@ def create_app(
         Quart: Configured Quart application instance.
     """
     app = Quart(__name__)
+    app = cors(app)
 
     db_session_middleware(app)
 
