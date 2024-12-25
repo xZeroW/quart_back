@@ -2,8 +2,8 @@ import uuid
 from datetime import datetime
 
 from sqlalchemy import DateTime
-from sqlalchemy.ext.declarative import as_declarative, declared_attr
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.ext.declarative import declared_attr
+from sqlalchemy.orm import Mapped, mapped_column, as_declarative
 
 
 @as_declarative()
