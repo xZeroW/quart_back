@@ -120,10 +120,10 @@ class Settings(
     AWSSettings,
     SMTPSettings,
     TestSettings,
-    # RedisCacheSettings,
+    RedisCacheSettings,
     ClientSideCacheSettings,
-    # RedisQueueSettings,
-    # RedisRateLimiterSettings,
+    RedisQueueSettings,
+    RedisRateLimiterSettings,
     DefaultRateLimitSettings,
     EnvironmentSettings,
 ):
