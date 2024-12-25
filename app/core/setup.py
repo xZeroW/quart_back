@@ -15,8 +15,6 @@ from app.core.config import (
     TestSettings,
 )
 from app.core.error_handlers import register_error_handlers
-from app.core.middleware import db_session_middleware
-
 
 def create_app(
     router: Blueprint,
@@ -44,8 +42,6 @@ def create_app(
     """
     app = Quart(__name__)
     app = cors(app)
-
-    db_session_middleware(app)
 
     app.register_blueprint(router)
 
