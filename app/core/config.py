@@ -24,9 +24,12 @@ class CryptSettings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = Field(default=30)
     REFRESH_TOKEN_EXPIRE_DAYS: int = Field(default=7)
 
+class AppDiskOption(Enum):
+    S3 = "s3"
+    GCS = "gcs"
 
 class DiskSettings(BaseSettings):
-    APP_DISK: str = Field(default="s3")
+    APP_DISK: str = Field(default=AppDiskOption.S3)
 
 
 class AWSSettings(BaseSettings):
@@ -103,13 +106,14 @@ class DatabaseSettings(BaseSettings):
 
 
 class EnvironmentOption(Enum):
-    LOCAL = "local"
+    DEVELOPMENT = "development"
     STAGING = "staging"
+    MAIN = "main"
     PRODUCTION = "production"
 
 
 class EnvironmentSettings(BaseSettings):
-    ENVIRONMENT: EnvironmentOption = Field(default="local")
+    ENVIRONMENT: EnvironmentOption = Field(default=EnvironmentOption.DEVELOPMENT)
 
 
 class Settings(
