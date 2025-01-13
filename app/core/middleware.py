@@ -1,7 +1,9 @@
-from quart import g
 from functools import wraps
 
-from app.core.db.database import get_user_db_session
+from quart import g
+
+from app.core.database import get_user_db_session
+
 
 def session_middleware(func):
     @wraps(func)
@@ -19,4 +21,5 @@ def session_middleware(func):
             if db is not None:
                 await db.close()
         return response
+
     return wrapper

@@ -1,18 +1,12 @@
 import uuid
 from datetime import datetime
+from typing import Optional
 
-from sqlalchemy import DateTime
-from sqlalchemy.ext.declarative import declared_attr
-from sqlalchemy.orm import Mapped, mapped_column, as_declarative
+from sqlmodel import Field, SQLModel
 
 
-@as_declarative()
-class Base:
-    @declared_attr
-    def __tablename__(cls):
-        return cls.__name__.lower()
-
-    id: Mapped[uuid.UUID] = mapped_column(default=uuid.uuid4, primary_key=True, unique=True, index=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now)
-    updated_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), default=None)
-    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), default=None)
+class Base(SQLModel):
+    id: uuid.UUID = Field(default=uuid.uuid4(), primary_key=True, index=True)
+    created_at: datetime = Field(default=None)
+    updated_at: Optional[datetime] = Field(default=None)
+    deleted_at: Optional[datetime] = Field(default=None)

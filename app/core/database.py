@@ -7,6 +7,8 @@ from sqlalchemy.orm import sessionmaker
 from app.core.config import settings
 from app.models.customer_connections_model import CustomersConnections
 
+sessions = {}
+
 painel_engine = create_async_engine(settings.DATABASE_URL, echo=False, future=True)
 painel_session = sessionmaker(bind=painel_engine, class_=AsyncSession, expire_on_commit=False)
 
@@ -19,7 +21,7 @@ async def get_user_db_session() -> AsyncSession:
 
     account_id = data["account_id"]
 
-    try:
+    if account_id not in sessions:
         async with painel_session() as session:
             result = await session.execute(
                 select(CustomersConnections).where(CustomersConnections.account_id == account_id)
@@ -34,9 +36,10 @@ async def get_user_db_session() -> AsyncSession:
                 f"{db.database_host}:{db.database_port}/{db.database_name}"
             )
 
-            user_async_engine = create_async_engine(user_database_url, echo=False, future=True)
+            sessions[account_id] = create_async_engine(
+                user_database_url, echo=False, future=True, pool_size=10, max_overflow=5, pool_recycle=1800
+            )
 
-            return sessionmaker(bind=user_async_engine, class_=AsyncSession, expire_on_commit=False)()
+            # return sessionmaker(bind=user_async_engine, class_=AsyncSession, expire_on_commit=False)()
 
-    except Exception:
-        abort(503)
+    return sessions[account_id]
